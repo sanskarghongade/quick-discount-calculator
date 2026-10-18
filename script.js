@@ -206,11 +206,14 @@ function addDiscountRow() {
   return row;
 }
 
-/* At least one discount box must always stay on screen. */
+/* Keep the remove buttons enabled, and their labels in step with the row order. */
 function refreshRemoveButtons() {
   var rows = successiveRows();
-  rows.forEach(function (row) {
+  rows.forEach(function (row, index) {
+    var position = index + 1;
     row.querySelector('.remove-btn').disabled = rows.length <= 1;
+    row.querySelector('.remove-btn').setAttribute('aria-label', 'Remove discount ' + position);
+    row.querySelector('.discount-input').setAttribute('aria-label', 'Discount ' + position + ' percent');
   });
 }
 

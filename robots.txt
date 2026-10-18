@@ -1,0 +1,14 @@
+# robots.txt for Quick Discount Calculator
+#
+# NOTE: Google only reads robots.txt from the HOST ROOT
+# (https://sanskarghongade.github.io/robots.txt), not from a project
+# subfolder. So this file is NOT used by Google while the site lives at
+# sanskarghongade.github.io/quick-discount-calculator/.
+# It is harmless to keep, and becomes fully effective if you later move
+# to a custom domain or create a sanskarghongade.github.io user site.
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sanskarghongade.github.io/quick-discount-calculator/sitemap.xml

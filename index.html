@@ -3,27 +3,115 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quick Discount Calculator &ndash; Instant Discount &amp; Final Price</title>
-  <meta name="description" content="Free instant discount calculator. Find the discount amount and the final price, stack successive discounts, and compare two offers. Works on mobile. No sign-up, nothing stored.">
+  <title>Quick Discount Calculator &ndash; Successive &amp; Compare Offers</title>
+  <meta name="description" content="Free instant discount calculator: find the discount amount and final price, stack successive discounts, and compare two offers. Works on mobile, no sign-up.">
+
+  <link rel="canonical" href="https://sanskarghongade.github.io/quick-discount-calculator/">
+
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="theme-color" content="#4f46e5">
 
-  <!-- After you publish, uncomment the line below and use your real address (helps Google). -->
-  <!-- <link rel="canonical" href="https://your-domain.example/"> -->
+  <!-- ===== Open Graph (Facebook, LinkedIn, WhatsApp, Discord...) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Quick Discount Calculator">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Quick Discount Calculator &ndash; Successive &amp; Compare Offers">
+  <meta property="og:description" content="Free instant discount calculator: find the discount amount and final price, stack successive discounts, and compare two offers. Works on mobile, no sign-up.">
+  <meta property="og:url" content="https://sanskarghongade.github.io/quick-discount-calculator/">
+  <meta property="og:image" content="https://sanskarghongade.github.io/quick-discount-calculator/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Quick Discount Calculator logo beside a worked example: 1,499 at 25% off leaves a final price of 1,124.25">
+
+  <!-- ===== Twitter / X card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quick Discount Calculator &ndash; Successive &amp; Compare Offers">
+  <meta name="twitter:description" content="Free instant discount calculator: find the discount amount and final price, stack successive discounts, and compare two offers.">
+  <meta name="twitter:image" content="https://sanskarghongade.github.io/quick-discount-calculator/og-image.png">
+  <meta name="twitter:image:alt" content="Quick Discount Calculator logo and an example discount calculation">
 
   <link rel="icon" type="image/svg+xml" href="logo.svg">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 
+  <!-- ===== Structured data: the web app itself ===== -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
+    "@id": "https://sanskarghongade.github.io/quick-discount-calculator/#app",
     "name": "Quick Discount Calculator",
-    "description": "Calculate discount amounts and final prices instantly, including successive discounts and comparing two offers.",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Any",
+    "url": "https://sanskarghongade.github.io/quick-discount-calculator/",
+    "description": "Free online discount calculator that instantly shows the discount amount and final price, supports successive (stacked) discounts, and compares two discount offers.",
+    "applicationCategory": "CalculatorApplication",
+    "operatingSystem": "All",
     "browserRequirements": "Requires JavaScript",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "INR",
+      "availability": "https://schema.org/InStock"
+    },
+    "featureList": [
+      "Calculate the discount amount and final price from a price and a percentage",
+      "Stack successive discounts, each applied to the already reduced price",
+      "Compare two discount offers and see which is cheaper",
+      "Instant results as you type, with input validation",
+      "Mobile friendly with no sign-up and no data stored"
+    ]
+  }
+  </script>
+
+  <!-- ===== Structured data: FAQ (mirrors the visible Q&A on this page) ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate a discount on a price?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Multiply the original price by the discount percentage and divide by 100 to get the discount amount, then subtract it from the original price. For example, 20% of 1,000 is 200, so the final price is 800."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I calculate successive discounts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Apply each discount to the price that is already reduced. For a price of 1,000 with 20% then 10%, the first discount leaves 800, and the second discount leaves 720."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are two 10% discounts the same as 20% off?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Successive discounts are multiplied, so two 10% discounts give 0.9 times 0.9, which is 0.81. That is a 19% total discount, slightly less than a single 20% discount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I compare two discount offers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Work out the final price of each offer and compare the results. The offer with the lower final price is the better deal, even if its advertised discount percentage looks smaller."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the discount calculator free, and does it store my data?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is completely free and needs no sign-up. Every calculation runs inside your browser, so nothing you type is stored or sent anywhere."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -37,7 +125,7 @@
         <img class="brand-mark" src="logo.svg" alt="" width="44" height="44" decoding="async">
         <h1>Quick Discount <span class="wordmark-soft">Calculator</span></h1>
       </div>
-      <p class="tagline">Work out the discount and the final price &mdash; instantly.</p>
+      <p class="tagline">Work out any discount instantly &mdash; single, successive, or comparing two offers.</p>
 
       <div class="currency">
         <label for="currency">Currency</label>
@@ -201,16 +289,34 @@
       </div>
     </section>
 
-    <!-- ============ Short explanation (also useful for search) ============ -->
-    <section class="info">
-      <h2>How the discount maths works</h2>
-      <p>A percentage discount is just a fraction of the original price. For example, 20% of 1,000 is 200, so the final price is 800.</p>
-      <ul>
-        <li><strong>Single discount:</strong> final price = original price &minus; (original price &times; discount &divide; 100).</li>
-        <li><strong>Successive discounts:</strong> every discount applies to the price that is already reduced, so you multiply the amounts that remain: original &times; (1 &minus; d1/100) &times; (1 &minus; d2/100) and so on. Two 10% discounts give 0.9 &times; 0.9 = 0.81, which is a 19% total discount, not 20%.</li>
-        <li><strong>Comparing offers:</strong> work out the final price of each offer and pick the lower one.</li>
-      </ul>
-      <p class="note">Everything is calculated in your browser. Nothing you type is stored or sent anywhere.</p>
+    <!-- ============ Visible FAQ (mirrored exactly by the FAQPage schema above) ============ -->
+    <section class="info" id="faq">
+      <h2>Frequently asked questions about discounts</h2>
+
+      <article class="faq-item">
+        <h3>How do I calculate a discount on a price?</h3>
+        <p>Multiply the original price by the discount percentage and divide by 100 to get the discount amount, then subtract it from the original price. For example, 20% of 1,000 is 200, so the final price is 800.</p>
+      </article>
+
+      <article class="faq-item">
+        <h3>How do I calculate successive discounts?</h3>
+        <p>Apply each discount to the price that is already reduced. For a price of 1,000 with 20% then 10%, the first discount leaves 800, and the second discount leaves 720.</p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Are two 10% discounts the same as 20% off?</h3>
+        <p>No. Successive discounts are multiplied, so two 10% discounts give 0.9 &times; 0.9 = 0.81. That is a 19% total discount, slightly less than a single 20% discount.</p>
+      </article>
+
+      <article class="faq-item">
+        <h3>How do I compare two discount offers?</h3>
+        <p>Work out the final price of each offer and compare the results. The offer with the lower final price is the better deal, even if its advertised discount percentage looks smaller.</p>
+      </article>
+
+      <article class="faq-item">
+        <h3>Is the discount calculator free, and does it store my data?</h3>
+        <p>Yes, it is completely free and needs no sign-up. Every calculation runs inside your browser, so nothing you type is stored or sent anywhere.</p>
+      </article>
     </section>
 
   </main>
