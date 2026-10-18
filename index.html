@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quick Discount Calculator &ndash; Instant Discount &amp; Final Price</title>
+  <meta name="description" content="Free instant discount calculator. Find the discount amount and the final price, stack successive discounts, and compare two offers. Works on mobile. No sign-up, nothing stored.">
+  <meta name="theme-color" content="#4f46e5">
+
+  <!-- After you publish, uncomment the line below and use your real address (helps Google). -->
+  <!-- <link rel="canonical" href="https://your-domain.example/"> -->
+
+  <link rel="icon" type="image/svg+xml" href="logo.svg">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Quick Discount Calculator",
+    "description": "Calculate discount amounts and final prices instantly, including successive discounts and comparing two offers.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to calculator</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <img class="brand-mark" src="logo.svg" alt="" width="44" height="44" decoding="async">
+        <h1>Quick Discount <span class="wordmark-soft">Calculator</span></h1>
+      </div>
+      <p class="tagline">Work out the discount and the final price &mdash; instantly.</p>
+
+      <div class="currency">
+        <label for="currency">Currency</label>
+        <select id="currency">
+          <option value="INR">&#8377; INR</option>
+          <option value="USD">$ USD</option>
+          <option value="EUR">&euro; EUR</option>
+          <option value="GBP">&pound; GBP</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+
+    <noscript>
+      <p class="noscript">This calculator needs JavaScript. Please turn JavaScript on and reload the page to use it.</p>
+    </noscript>
+
+    <nav class="tabs" role="tablist" aria-label="Calculator mode">
+      <button class="tab is-active" id="tab-single" type="button" role="tab" aria-selected="true" aria-controls="panel-single">Single</button>
+      <button class="tab" id="tab-successive" type="button" role="tab" aria-selected="false" aria-controls="panel-successive" tabindex="-1">Successive</button>
+      <button class="tab" id="tab-compare" type="button" role="tab" aria-selected="false" aria-controls="panel-compare" tabindex="-1">Compare</button>
+    </nav>
+
+    <!-- ============ Single discount ============ -->
+    <section class="panel" id="panel-single" role="tabpanel" aria-labelledby="tab-single">
+      <h2>Single discount</h2>
+
+      <div class="field">
+        <label for="s-price">Original price</label>
+        <div class="input-group has-prefix">
+          <span class="prefix" data-symbol aria-hidden="true">&#8377;</span>
+          <input id="s-price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1000">
+        </div>
+        <p class="error" id="s-price-error" role="alert"></p>
+      </div>
+
+      <div class="field">
+        <label for="s-discount">Discount</label>
+        <div class="input-group has-suffix">
+          <input id="s-discount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 10">
+          <span class="suffix" aria-hidden="true">%</span>
+        </div>
+        <p class="error" id="s-discount-error" role="alert"></p>
+      </div>
+
+      <div class="results" aria-live="polite">
+        <div class="result">
+          <span class="result-label">You save</span>
+          <span class="result-value" id="s-save">&mdash;</span>
+        </div>
+        <div class="result result-primary">
+          <span class="result-label">Final price</span>
+          <span class="result-value" id="s-final">&mdash;</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="s-clear">Clear</button>
+      </div>
+    </section>
+
+    <!-- ============ Successive discounts ============ -->
+    <section class="panel" id="panel-successive" role="tabpanel" aria-labelledby="tab-successive" hidden>
+      <h2>Successive discounts</h2>
+
+      <div class="field">
+        <label for="x-price">Original price</label>
+        <div class="input-group has-prefix">
+          <span class="prefix" data-symbol aria-hidden="true">&#8377;</span>
+          <input id="x-price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1000">
+        </div>
+        <p class="error" id="x-price-error" role="alert"></p>
+      </div>
+
+      <fieldset class="discounts">
+        <legend>Discounts, applied one after another</legend>
+        <div class="discount-list" id="x-discounts"></div>
+        <button type="button" class="btn btn-soft" id="x-add">+ Add another discount</button>
+      </fieldset>
+
+      <div class="results" aria-live="polite">
+        <div class="result">
+          <span class="result-label">Total you save</span>
+          <span class="result-value" id="x-save">&mdash;</span>
+        </div>
+        <div class="result">
+          <span class="result-label">Effective total discount</span>
+          <span class="result-value" id="x-effective">&mdash;</span>
+        </div>
+        <div class="result result-primary">
+          <span class="result-label">Final price</span>
+          <span class="result-value" id="x-final">&mdash;</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="x-clear">Clear</button>
+      </div>
+    </section>
+
+    <!-- ============ Compare two offers ============ -->
+    <section class="panel" id="panel-compare" role="tabpanel" aria-labelledby="tab-compare" hidden>
+      <h2>Compare two offers</h2>
+
+      <div class="compare-grid">
+        <fieldset class="offer" id="offer-a">
+          <legend>Offer A</legend>
+          <div class="field">
+            <label for="a-price">Price</label>
+            <div class="input-group has-prefix">
+              <span class="prefix" data-symbol aria-hidden="true">&#8377;</span>
+              <input id="a-price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1000">
+            </div>
+            <p class="error" id="a-price-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="a-discount">Discount</label>
+            <div class="input-group has-suffix">
+              <input id="a-discount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 20">
+              <span class="suffix" aria-hidden="true">%</span>
+            </div>
+            <p class="error" id="a-discount-error" role="alert"></p>
+          </div>
+          <div class="offer-result">
+            <span>Final price</span>
+            <strong id="a-final">&mdash;</strong>
+          </div>
+        </fieldset>
+
+        <fieldset class="offer" id="offer-b">
+          <legend>Offer B</legend>
+          <div class="field">
+            <label for="b-price">Price</label>
+            <div class="input-group has-prefix">
+              <span class="prefix" data-symbol aria-hidden="true">&#8377;</span>
+              <input id="b-price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 1200">
+            </div>
+            <p class="error" id="b-price-error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="b-discount">Discount</label>
+            <div class="input-group has-suffix">
+              <input id="b-discount" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 30">
+              <span class="suffix" aria-hidden="true">%</span>
+            </div>
+            <p class="error" id="b-discount-error" role="alert"></p>
+          </div>
+          <div class="offer-result">
+            <span>Final price</span>
+            <strong id="b-final">&mdash;</strong>
+          </div>
+        </fieldset>
+      </div>
+
+      <p class="verdict" id="verdict" aria-live="polite">Enter a price and a discount for both offers to compare them.</p>
+
+      <div class="actions">
+        <button type="button" class="btn btn-ghost" id="c-clear">Clear</button>
+      </div>
+    </section>
+
+    <!-- ============ Short explanation (also useful for search) ============ -->
+    <section class="info">
+      <h2>How the discount maths works</h2>
+      <p>A percentage discount is just a fraction of the original price. For example, 20% of 1,000 is 200, so the final price is 800.</p>
+      <ul>
+        <li><strong>Single discount:</strong> final price = original price &minus; (original price &times; discount &divide; 100).</li>
+        <li><strong>Successive discounts:</strong> every discount applies to the price that is already reduced, so you multiply the amounts that remain: original &times; (1 &minus; d1/100) &times; (1 &minus; d2/100) and so on. Two 10% discounts give 0.9 &times; 0.9 = 0.81, which is a 19% total discount, not 20%.</li>
+        <li><strong>Comparing offers:</strong> work out the final price of each offer and pick the lower one.</li>
+      </ul>
+      <p class="note">Everything is calculated in your browser. Nothing you type is stored or sent anywhere.</p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <button type="button" class="btn btn-ghost" id="clear-all">Clear all</button>
+      <p>Quick Discount Calculator &middot; free, no sign-up, works on mobile.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+</content>

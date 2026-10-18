@@ -1,0 +1,5 @@
+# Normalise line endings so the repo stays clean across Windows/Mac/Linux
+* text=auto
+
+*.svg text
+*.md text
